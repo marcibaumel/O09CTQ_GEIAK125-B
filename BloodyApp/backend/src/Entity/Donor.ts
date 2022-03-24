@@ -1,8 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity} from "typeorm";
 import { Donation } from "./Donation";
 
 @Entity()
-export class Donor {
+export class Donor extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     donor_id: number;
@@ -20,7 +20,7 @@ export class Donor {
     birth_place: string;
 
     @Column()
-    birth_time: string;
+    birth_time: Date;
 
     @Column()
     postcode: string;
