@@ -12,22 +12,87 @@ router.get('/test', (req, res, next) => {
   });
 });
 
-//TODO:CREATE A NEW DONATION PLACE
-router.post('', (req,res,next)=>{
+//CREATE A NEW DONATION PLACE
+router.post('', (req, res, next) => {
   const repository = getRepository(DonationPlace);
-  repository.create({
-    name:  req.body.name,
-    postcode:  req.body.postcode,
+  const donationPlaceEntity = repository.create({
+    name: req.body.name,
+    postcode: req.body.postcode,
     town: req.body.town,
     address: req.body.address,
-    active: req.body.active
-  })
-})
+    active: req.body.active,
+  });
+  repository
+    .save(donationPlaceEntity)
+    .then((result) => {
+      res.status(201).json({
+        messager: 'Donation place created',
+        result: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+        message: 'Something wrong with the donation place create',
+      });
+    });
+});
 
-//TODO:DELETE A DONATION (by id)
+//DELETE A DONATION (by id)
+router.delete('/:id', async (req, res, next) => {
+  console.log('Delete has started with this id:' + req.body.id);
+  const repository = getRepository(DonationPlace);
+  try {
+    const id = req.params.id;
+    const entity = await repository.findOne(id);
+    if (!entity) {
+      return res.status(404).json({ message: 'Entity not founded' });
+    }
 
-//TODO:SET STATUS (PUT) by id
+    await repository.delete(entity);
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error(err);
+  }
+});
 
-//TODO:GET ALL PLACE
+//FOR SET STATUS (PUT)
+router.put('', (req, res, next) => {
+  const repository = getRepository(DonationPlace);
+  const donationPlaceEntity = repository.create({
+    place_id: req.body.place_id,
+    name: req.body.name,
+    postcode: req.body.postcode,
+    town: req.body.town,
+    address: req.body.address,
+    active: req.body.active,
+  });
+  repository
+    .save(donationPlaceEntity)
+    .then((result) => {
+      res.status(201).json({
+        messager: 'Donation place updated',
+        result: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+        message: 'Something wrong with the donation place create',
+      });
+    });
+});
+
+//GET ALL PLACE
+router.get('', (req, res, next) => {
+  const repository = getRepository(DonationPlace);
+  repository.find().then((result) => {
+    return res.status(200).json({
+      message: 'Elementes fetched succesfull',
+      elements: result,
+    });
+  });
+});
+
 
 module.exports = router;

@@ -42,7 +42,7 @@ router.post('/signup', (req, res, next) => {
   });
 });
 
-
+//LOGIN A DOCTOR
 router.post("/login", (req, res, next) => {
   const repository = getRepository(Doctor);
   let fecthedUser:any;
