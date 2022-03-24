@@ -20,9 +20,9 @@ router.post('/signup', (req, res, next) => {
 
   bcrypt.hash(req.body.password, 10).then((hash: any) => {
     const doctorEntity = repository.create({
-      email: 'test',
-      first_name: 'test',
-      last_name: 'test',
+      email: req.body.email,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       password: hash,
     });
     repository
@@ -40,6 +40,44 @@ router.post('/signup', (req, res, next) => {
         });
       });
   });
+});
+
+
+router.post("/login", (req, res, next) => {
+  const repository = getRepository(Doctor);
+  let fecthedUser:any;
+  repository.findOne({ email: req.body.email })
+    .then((user) => {
+      console.log(user);
+      if (!user) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+      fecthedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then((result) => {
+      if (!result) {
+        return res.status(401).json({
+          message: "Auth failed",
+        });
+      }
+      const token = jwt.sign(
+        { email: fecthedUser.email, userId: fecthedUser._id },
+        "secret_this_should_be_longer",
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600
+      })
+    })
+    .catch((err) => {
+      return res.status(401).json({
+        message: "Auth failed",
+      });
+    });
 });
 
 //GET ALL DOCTOR

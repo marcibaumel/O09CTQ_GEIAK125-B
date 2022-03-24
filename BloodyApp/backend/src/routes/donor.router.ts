@@ -12,5 +12,10 @@ router.get('/test', (req, res, next) => {
   });
 });
 
+//TODO:CREATE A NEW DONOR
+
+//TODO:DELETE A DONOR
+
+//TODO:GET ALL DONOR
 
 module.exports = router;
