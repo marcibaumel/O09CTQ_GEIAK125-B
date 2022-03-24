@@ -1,20 +1,37 @@
 import 'reflect-metadata';
 import {createConnection} from 'typeorm';
 import { connectionOptions } from './ormconfig';
-
 import express from 'express'
-const app = express();
+import bodyParser from 'body-parser';
 
-app.get('/', (req, res, next)=>{
+const app = express();
+const doctorRoute = require('./routes/doctor.router')
+
+app.use(bodyParser.json());
+
+//CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+  );
+  next();
+});
+
+createConnection(connectionOptions).then(async connection => {
+  app.listen(3000, () => console.log('Successfully listening on 3000 ...'));
+  console.log('Connected to database.');
+}).catch(error => console.log(error));
+
+
+app.get('/test', (req, res, next)=>{
+  console.log(req.body)
   res.send('hello');
 })
 
-app.listen(5000, ()=> console.log('Server running'));
-
-
-createConnection(connectionOptions).then(async connection => {
-  console.log('Connected to database.');
-
-  // TODO: set up server
-
-}).catch(error => console.log(error));
+app.use("/api/doctor", doctorRoute)
