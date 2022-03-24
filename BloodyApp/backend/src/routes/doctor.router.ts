@@ -3,6 +3,7 @@ import { async } from 'rxjs';
 import { getRepository } from 'typeorm';
 import { Doctor } from '../entity/Doctor';
 
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
@@ -14,7 +15,7 @@ router.get('/test', (req, res, next) => {
 });
 
 //CREATE A NEW DOCTOR
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   const repository = getRepository(Doctor);
 
   bcrypt.hash(req.body.password, 10).then((hash: any) => {
@@ -41,8 +42,16 @@ router.post('/signup', async (req, res, next) => {
   });
 });
 
-//LOGIN A DOCTOR
-
+//GET ALL DOCTOR
+router.get('', (req, res, next) => {
+  const repository = getRepository(Doctor);
+  repository.find().then((result) => {
+    return res.status(200).json({
+      message: 'Elementes fetched succesfull',
+      elements: result,
+    });
+  });
+});
 
 //DELETE A DOCTOR
 router.delete('/:id', async (req, res, next) => {
