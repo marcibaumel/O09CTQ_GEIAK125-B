@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity} from "typ
 import { Donation } from "./Donation";
 
 @Entity()
-export class Doctor extends BaseEntity {
+export class Doctor  {
 
     @PrimaryGeneratedColumn()
     doctor_id: number;

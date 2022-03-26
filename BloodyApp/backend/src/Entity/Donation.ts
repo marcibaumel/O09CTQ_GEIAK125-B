@@ -16,6 +16,9 @@ export class Donation {
     success_donation: boolean;
 
     @Column()
+    about: string;
+
+    @Column()
     directed_donation: boolean;
 
     @Column()
