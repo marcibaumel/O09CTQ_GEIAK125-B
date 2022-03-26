@@ -9,6 +9,9 @@ import { NewPlaceComponent } from './new-place/new-place.component';
 import { NewDonorComponent } from './new-donor/new-donor.component';
 import { NewDonationComponent } from './new-donation/new-donation.component';
 import { DonationListComponent } from './donation-list/donation-list.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import { DonationListComponent } from './donation-list/donation-list.component';
     NewPlaceComponent,
     NewDonorComponent,
     NewDonationComponent,
-    DonationListComponent
+    DonationListComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
