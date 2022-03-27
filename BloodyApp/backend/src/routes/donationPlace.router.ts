@@ -56,8 +56,8 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-//FOR SET STATUS (PUT)
-router.put('', (req, res, next) => {
+//UPDATE A DONATION PLACE
+router.patch('', (req, res, next) => {
   const repository = getRepository(DonationPlace);
   const donationPlaceEntity = repository.create({
     place_id: req.body.place_id,
@@ -82,6 +82,8 @@ router.put('', (req, res, next) => {
       });
     });
 });
+
+
 
 //GET ALL PLACE
 router.get('', (req, res, next) => {

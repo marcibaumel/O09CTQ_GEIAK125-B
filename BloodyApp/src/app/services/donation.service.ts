@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DonationPlaceData } from '../models/DonationPlaceData';
 import { Router } from '@angular/router';
-import { map, Subject } from 'rxjs';
+import {Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class DonationService {
@@ -31,7 +32,7 @@ export class DonationService {
       .subscribe((responseData) => {
         const id = responseData.place_id;
         //console.log(responseData.message);
-        this.router.navigate(['/']);
+        this.router.navigate(['/places']);
       });
   }
 
@@ -40,17 +41,17 @@ export class DonationService {
 
   getAllDonationPlace(){
     this.http
-      .get<{ message: string; donationPlaceElement: any}>('http://localhost:3000/api/donationplace')
+      .get<{ message: string; elements: any}>('http://localhost:3000/api/donationplace')
       .pipe(
         map((donationPlaceData) => {
-          return donationPlaceData.donationPlaceElement.map((element) => {
-            //console.log(element.title);
+          return donationPlaceData.elements.map((element) => {
             return {
-              title: element.title,
-              about: element.about,
-              platform: element.platform,
-              added: element.added,
-              id: element._id,
+              place_id: element.place_id,
+              name: element.name,
+              postcode: element.postcode,
+              town: element.town,
+              address: element.address,
+              active: element.active,
             };
           });
         })
@@ -59,5 +60,19 @@ export class DonationService {
         this.donationPlaceElements = transformedElements;
         this.donationPlaceElementsUpdated.next([...this.donationPlaceElements]);
       });
+  }
+
+  getDonationPlaceElementsUpdateListener(){
+    return this.donationPlaceElementsUpdated.asObservable();
+  }
+
+  donationPlaceDeleteById(elementId: string){
+    console.log(elementId)
+    return this.http.delete('http://localhost:3000/api/donationplace/' + elementId);
+  }
+
+  donationPlaceChangeActive(element: DonationPlaceData){
+    console.log(element.place_id);
+    return this.http.patch<{ message: string; place_id: number }>('http://localhost:3000/api/donationplace', element)
   }
 }
