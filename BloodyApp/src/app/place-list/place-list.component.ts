@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DonationPlaceData } from '../models/DonationPlaceData';
 
 @Component({
   selector: 'app-place-list',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./place-list.component.css']
 })
 export class PlaceListComponent implements OnInit {
+
+  donationPlaceElements: DonationPlaceData[]= [];
+  private donationPlaceSub: Subscription;
 
   constructor() { }
 
