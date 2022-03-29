@@ -25,7 +25,7 @@ router.post('', (req, res, next) => {
     directed_taj_code: req.body.directed_taj_code,
     donor_id_fk: req.body.donor_id_fk,
     doctor_id_fk: req.body.doctor_id_fk,
-    donationPlace_id_fk: req.body.doctor_id_fk
+    donationPlace_id_fk: req.body.donationPlace_id_fk
   });
 
   repository
