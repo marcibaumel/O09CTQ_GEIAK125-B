@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatCarouselModule } from 'ng-mat-carousel';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { CreateDonorComponent } from './components/create-donor/create-donor.com
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -37,10 +39,12 @@ import { WelcomePageComponent } from './components/welcome-page/welcome-page.com
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatExpansionModule,
     MatButtonModule,
     MatCarouselModule.forRoot(),
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

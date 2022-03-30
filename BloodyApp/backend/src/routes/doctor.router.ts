@@ -1,5 +1,5 @@
 import express from 'express';
-import { async } from 'rxjs';
+
 import { getRepository } from 'typeorm';
 import { Doctor } from '../entity/Doctor';
 

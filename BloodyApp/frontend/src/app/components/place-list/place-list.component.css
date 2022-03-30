@@ -1,0 +1,9 @@
+.place-active{
+  margin: 2rem;
+  background-color:rgb(237, 172, 248)
+}
+
+.place-inactive{
+  margin: 2rem;
+  background-color:rgb(78, 63, 63)
+}
