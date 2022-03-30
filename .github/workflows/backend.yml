@@ -3,6 +3,10 @@
 
 name: Backend CI
 
+defaults:
+  run:
+    working-directory: BloodyApp # The working directory path
+
 on:
   push:
     branches: [ main ]
