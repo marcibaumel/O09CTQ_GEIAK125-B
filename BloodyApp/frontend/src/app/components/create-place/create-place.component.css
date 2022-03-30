@@ -9,3 +9,9 @@ mat-select{
 .mat-raised-button{
   margin-top: 2rem;
 }
+
+.formated-card{
+  max-width: 300px;
+  margin-bottom: 50px;
+  float: left;
+}

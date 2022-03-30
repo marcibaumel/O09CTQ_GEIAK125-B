@@ -33,7 +33,7 @@ export class CreatePlaceComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(2)],
       }),
       active: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
     });
   }
