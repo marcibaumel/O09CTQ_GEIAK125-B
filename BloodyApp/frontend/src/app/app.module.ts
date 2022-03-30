@@ -5,6 +5,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCarouselModule } from 'ng-mat-carousel';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +48,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatExpansionModule,
     MatButtonModule,
     MatCarouselModule.forRoot(),
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

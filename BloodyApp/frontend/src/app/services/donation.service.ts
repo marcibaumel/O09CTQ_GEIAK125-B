@@ -32,7 +32,7 @@ export class DonationService {
       .subscribe((responseData) => {
         const id = responseData.place_id;
         //console.log(responseData.message);
-        this.router.navigate(['/places']);
+        this.router.navigate(['/donationplaces']);
       });
   }
 
