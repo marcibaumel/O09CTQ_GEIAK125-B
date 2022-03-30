@@ -17,7 +17,7 @@ export class NewDonorComponent implements OnInit {
       name: new FormControl(null, {
         validators: [
           Validators.required,
-          Validators.minLength(10),
+          Validators.minLength(5),
           Validators.maxLength(50),
         ],
       }),
@@ -43,9 +43,12 @@ export class NewDonorComponent implements OnInit {
         validators: [Validators.required],
       }),
       taj_code: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
     });
   }
 
+  onSaveNewDonor(){
+    console.log(this.form)
+  }
 }
