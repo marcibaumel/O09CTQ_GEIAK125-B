@@ -3,14 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/header/header.component';
+import { DonationListComponent } from './components/donation-list/donation-list.component';
+import { PlaceListComponent } from './components/place-list/place-list.component';
+import { CreateDonationComponent } from './components/create-donation/create-donation.component';
+import { CreatePlaceComponent } from './components/create-place/create-place.component';
+import { CreateDonorComponent } from './components/create-donor/create-donor.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    DonationListComponent,
+    PlaceListComponent,
+    CreateDonationComponent,
+    CreatePlaceComponent,
+    CreateDonorComponent,
+    LoginComponent,
+    SignupComponent,
+    WelcomePageComponent,
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
