@@ -31,9 +31,9 @@ export class Donor extends BaseEntity {
     @Column()
     address: string;
 
-    @Column()
+    @Column({unique:true})
     taj_code: string;
-
+    
     @OneToMany(() => Donation, (donation: Donation) => donation.donation_id)
     donations: Donation[]
 }

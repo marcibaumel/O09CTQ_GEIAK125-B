@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DonorService } from 'src/app/services/donor.service';
 
 
 
@@ -12,7 +13,7 @@ export class CreateDonorComponent implements OnInit {
 
   form:FormGroup;
 
-  constructor() { }
+  constructor(private donorService:DonorService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -96,8 +97,18 @@ export class CreateDonorComponent implements OnInit {
       }
       return;
     }
-
     alert("Minden adat helyes")
+    this.donorService.addNewDonor(
+      this.form.value.name,
+      this.form.value.sex,
+      this.form.value.nationality,
+      this.form.value.birth_place,
+      this.form.value.birth_time,
+      this.form.value.postcode,
+      this.form.value.town,
+      this.form.value.address,
+      this.form.value.taj_code
+    );
 
   }
 
