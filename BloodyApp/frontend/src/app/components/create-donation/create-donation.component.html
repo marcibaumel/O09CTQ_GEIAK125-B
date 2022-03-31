@@ -1,1 +1,106 @@
-<p>create-donation works!</p>
+<mat-card>
+  <form [formGroup]="form" (submit)="onSaveNewDonation()">
+
+    <mat-form-field>
+      <mat-label>Select donation place</mat-label>
+      <mat-select formControlName="donationPlace_id_fk" required>
+        <!--Azok a helyek amik akítvak lista-->
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="donor_taj_code"
+        placeholder="Donor taj code"
+      />
+      <mat-error *ngIf="form.get('donor_taj_code').invalid"
+        >Please enter the donor taj code</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="date"
+        formControlName="donation_date"
+        placeholder="The doantion date"
+      />
+      <mat-error *ngIf="form.get('donation_date').invalid"
+        >Please enter the donation date
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select doctor</mat-label>
+      <mat-select formControlName="doctor_id_fk" required>
+        <!--Orvos lista-->
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Success donation</mat-label>
+      <mat-select formControlName="success_donation" required>
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--TODO: csak akkor jelenjen meg about ha false a success-->
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="6"
+        formControlName="about"
+        placeholder="About"
+      ></textarea>
+      <mat-error *ngIf="form.get('about').invalid"
+        >Please enter the about
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Directed donation</mat-label>
+      <mat-select formControlName="directed_donation" required>
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--TODO: csak akkor jelenjen meg about ha true a directed donation-->
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="directed_name"
+        placeholder="Enter the directed name"
+      />
+      <mat-error *ngIf="form.get('directed_name').invalid"
+        >Please enter a valid directed name</mat-error
+      >
+    </mat-form-field>
+
+    <!--TODO: csak akkor jelenjen meg about ha true a directed donation-->
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="directed_taj_code"
+        placeholder="Enter the directed taj code"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="9"
+      />
+      <mat-error *ngIf="form.get('directed_taj_code').invalid"
+        >Please enter a valid directed taj code</mat-error
+      >
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">
+      Save Donation
+    </button>
+  </form>
+</mat-card>
