@@ -2,6 +2,7 @@ import express from 'express';
 import { getRepository } from 'typeorm';
 import { Donor } from '../entity/Donor';
 
+const checkAuth = require('../middleware/check-auth')
 const router = express.Router();
 
 //TEST DONOR ROUTER
@@ -12,7 +13,9 @@ router.get('/test', (req, res, next) => {
 });
 
 //CREATE A NEW DONOR
-router.post('', (req, res, next) => {
+router.post('',
+//checkAuth, 
+(req, res, next) => {
   const repository = getRepository(Donor);
   const donorEntity = repository.create({
     name: req.body.name,
