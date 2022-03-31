@@ -6,7 +6,6 @@ import { CreatePlaceComponent } from './components/create-place/create-place.com
 import { DonationListComponent } from './components/donation-list/donation-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlaceListComponent } from './components/place-list/place-list.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 const routes: Routes = [
@@ -17,7 +16,6 @@ const routes: Routes = [
   {path:'newdonation', component: CreateDonationComponent},
   {path:'createnewdonor', component: CreateDonorComponent},
   {path:'login', component:LoginComponent},
-  {path:'signup', component:SignupComponent}
 ];
 
 @NgModule({

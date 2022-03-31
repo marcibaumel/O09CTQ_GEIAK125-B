@@ -20,7 +20,6 @@ import { CreateDonationComponent } from './components/create-donation/create-don
 import { CreatePlaceComponent } from './components/create-place/create-place.component';
 import { CreateDonorComponent } from './components/create-donor/create-donor.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -36,7 +35,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     CreatePlaceComponent,
     CreateDonorComponent,
     LoginComponent,
-    SignupComponent,
     WelcomePageComponent,
 
   ],
