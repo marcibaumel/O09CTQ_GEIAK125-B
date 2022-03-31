@@ -1,6 +1,5 @@
 mat-form-field,
 textarea,
-mat-radio-group,
 mat-select{
   margin-top: 1rem;
   width: 100%;
@@ -10,8 +9,3 @@ mat-select{
   margin-top: 2rem;
 }
 
-.formated-card{
-  max-width: 300px;
-  margin-bottom: 50px;
-  float: left;
-}
