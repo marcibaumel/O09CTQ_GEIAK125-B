@@ -102,6 +102,8 @@
         type="text"
         formControlName="taj_code"
         placeholder="Enter the donor taj code"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="9"
       />
       <mat-error *ngIf="form.get('taj_code').invalid"
         >Please enter a valid taj code</mat-error

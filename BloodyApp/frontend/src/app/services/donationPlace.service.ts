@@ -36,6 +36,8 @@ export class DonationService {
       });
   }
 
+
+
   private donationPlaceElements: DonationPlaceData[] = [];
   private donationPlaceElementsUpdated = new Subject<DonationPlaceData[]>();
 

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
-import { DonationService } from 'src/app/services/donation.service';
+import { DonationService } from 'src/app/services/donationPlace.service';
 
 @Component({
   selector: 'app-place-list',
