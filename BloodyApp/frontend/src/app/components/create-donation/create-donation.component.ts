@@ -84,7 +84,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
   }
 
   onSaveNewDonation() {
-
+    //TODO: Refactor to methods to be more transparent
 
 
     if (!this.tajCodeValidationForDonor(this.form.get('donor_taj_code').value)) {
@@ -140,6 +140,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
         return;
       }
     }
+
+
 
     console.log(this.form.value);
 
