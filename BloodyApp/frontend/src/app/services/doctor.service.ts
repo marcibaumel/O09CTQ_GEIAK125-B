@@ -19,7 +19,7 @@ export class DoctorService{
         map((doctorData) => {
           return doctorData.elements.map((element) => {
             return {
-              doctor_id: element.place_id,
+              doctor_id: element.doctor_id,
               email: element.email,
               name: element.name,
               password: element.password,
