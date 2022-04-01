@@ -114,6 +114,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
     }
 
 
+    console.log(this.form.get('success_donation').value);
 
 
     if(this.form.get('success_donation').value == false ){
