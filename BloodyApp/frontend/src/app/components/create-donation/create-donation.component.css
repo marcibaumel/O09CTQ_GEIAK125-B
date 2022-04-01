@@ -9,3 +9,9 @@ mat-select{
   margin-top: 2rem;
 }
 
+.invisible{
+  display: block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}

@@ -32,9 +32,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form = new FormGroup({
       directed_taj_code: new FormControl(null, {
-        validators: [
-          Validators.required,
-        ],
+        validators: [],
       }),
       success_donation: new FormControl(null, {
         validators: [Validators.required],
@@ -46,10 +44,10 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
       directed_name: new FormControl(null, {
-        validators: [Validators.required],
+        validators: [],
       }),
       about: new FormControl(null, {
-        validators: [Validators.required],
+        validators: [],
       }),
       donor_taj_code: new FormControl(null, {
         validators: [Validators.required],
@@ -84,5 +82,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
     return currentDate.toISOString().substring(0,10);
   }
 
-  onSaveNewDonation() {}
+  onSaveNewDonation() {
+    //if succes
+    console.log(this.form.get('success_donation').value);
+  }
 }

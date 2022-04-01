@@ -15,16 +15,16 @@ export class Donation {
     @Column()
     success_donation: boolean;
 
-    @Column()
+    @Column({nullable: true})
     about: string;
 
     @Column()
     directed_donation: boolean;
 
-    @Column()
+    @Column({nullable: true})
     directed_name: string;
 
-    @Column()
+    @Column({nullable: true})
     directed_taj_code: string;
 
     @ManyToOne(() => Donor, (donor: Donor) => donor.donor_id)

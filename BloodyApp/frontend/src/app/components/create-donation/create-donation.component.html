@@ -48,8 +48,7 @@
       </mat-select>
     </mat-form-field>
 
-    <!--TODO: csak akkor jelenjen meg about ha false a success-->
-    <mat-form-field>
+    <mat-form-field [ngClass]="form.get('success_donation').value ? '':'invisible'" [ngClass]="form.get('success_donation').value == null ? 'invisible':''">
       <textarea
         matInput
         rows="6"
@@ -61,7 +60,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field [ngClass]="form.get('success_donation').value ? '':'invisible'">
       <mat-label>Directed donation</mat-label>
       <mat-select formControlName="directed_donation" required>
         <mat-option [value]="true">Yes</mat-option>
@@ -69,8 +68,7 @@
       </mat-select>
     </mat-form-field>
 
-    <!--TODO: csak akkor jelenjen meg about ha true a directed donation-->
-    <mat-form-field>
+    <mat-form-field [ngClass]="form.get('directed_donation').value ? '':'invisible'">
       <input
         matInput
         type="text"
@@ -82,8 +80,7 @@
       >
     </mat-form-field>
 
-    <!--TODO: csak akkor jelenjen meg about ha true a directed donation-->
-    <mat-form-field>
+    <mat-form-field [ngClass]="form.get('directed_donation').value ? '':'invisible'">
       <input
         matInput
         type="text"
