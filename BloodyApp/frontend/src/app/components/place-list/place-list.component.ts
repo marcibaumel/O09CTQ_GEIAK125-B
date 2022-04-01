@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
-import { DonationService } from 'src/app/services/donationPlace.service';
+import { DonationPlaceService } from 'src/app/services/donationPlace.service';
 
 @Component({
   selector: 'app-place-list',
@@ -13,15 +13,15 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   donationPlaceElements: DonationPlaceData[] = [];
   private donationPlaceSub: Subscription;
 
-  constructor(private donationService: DonationService) {}
+  constructor(private donationPlaceService: DonationPlaceService) {}
 
   ngOnDestroy(): void {
     this.donationPlaceSub.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.donationService.getAllDonationPlace();
-    this.donationPlaceSub = this.donationService
+    this.donationPlaceService.getAllDonationPlace();
+    this.donationPlaceSub = this.donationPlaceService
       .getDonationPlaceElementsUpdateListener()
       .subscribe((elements: DonationPlaceData[]) => {
         console.log(elements);
@@ -30,8 +30,8 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: string) {
-    this.donationService.donationPlaceDeleteById(id).subscribe(() => {
-      this.donationService.getAllDonationPlace();
+    this.donationPlaceService.donationPlaceDeleteById(id).subscribe(() => {
+      this.donationPlaceService.getAllDonationPlace();
     });
   }
 
@@ -39,7 +39,7 @@ export class PlaceListComponent implements OnInit, OnDestroy {
     console.log(element.active)
     element.active = !element.active;
     console.log(element.active)
-    this.donationService.donationPlaceChangeActive(element).subscribe(() => {
+    this.donationPlaceService.donationPlaceChangeActive(element).subscribe(() => {
       //this.donationService.getAllDonationPlace();
     });
   }

@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { DonationPlaceData } from '../models/DonationPlace.Data';
 
 @Injectable({ providedIn: 'root' })
-export class DonationService {
+export class DonationPlaceService {
   constructor(private http: HttpClient, private router: Router) {}
 
   addNewDonationPlace(

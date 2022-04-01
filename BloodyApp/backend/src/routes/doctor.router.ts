@@ -21,8 +21,7 @@ router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then((hash: any) => {
     const doctorEntity = repository.create({
       email: req.body.email,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
+      name: req.body.name,
       password: hash,
     });
     repository

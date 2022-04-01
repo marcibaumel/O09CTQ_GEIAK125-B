@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DonationService } from 'src/app/services/donationPlace.service';
+import { DonationPlaceService } from 'src/app/services/donationPlace.service';
 
 @Component({
   selector: 'app-create-place',
@@ -12,7 +12,7 @@ export class CreatePlaceComponent implements OnInit {
 
 
 
-  constructor(private donationService: DonationService) {}
+  constructor(private donationPlaceService: DonationPlaceService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -61,7 +61,7 @@ export class CreatePlaceComponent implements OnInit {
 
     console.log(this.form);
 
-    this.donationService.addNewDonationPlace(
+    this.donationPlaceService.addNewDonationPlace(
       this.form.value.name,
       this.form.value.postcode,
       this.form.value.town,

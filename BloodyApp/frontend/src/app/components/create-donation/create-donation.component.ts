@@ -1,5 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { DoctorData } from 'src/app/models/Doctor.Data';
+import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
+import { DoctorService } from 'src/app/services/doctor.service';
+import { DonationPlaceService } from 'src/app/services/donationPlace.service';
 
 
 @Component({
@@ -7,10 +12,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './create-donation.component.html',
   styleUrls: ['./create-donation.component.css'],
 })
-export class CreateDonationComponent implements OnInit {
+export class CreateDonationComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
-  constructor() {}
+  donationPlaceElements: DonationPlaceData[] = [];
+  private donationPlaceSub: Subscription;
+
+  doctorElements: DoctorData[] = [];
+  private doctorSub: Subscription;
+
+  constructor(private donationPlaceService: DonationPlaceService,
+    private doctorService:DoctorService) {}
+
+  ngOnDestroy(): void {
+    this.donationPlaceSub.unsubscribe();
+    this.doctorSub.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -44,6 +61,22 @@ export class CreateDonationComponent implements OnInit {
         validators: [Validators.required],
       }),
     });
+
+    this.donationPlaceService.getAllDonationPlace();
+    this.donationPlaceSub = this.donationPlaceService
+      .getDonationPlaceElementsUpdateListener()
+      .subscribe((elements: DonationPlaceData[]) => {
+        console.log(elements);
+        this.donationPlaceElements = elements;
+      });
+
+    this.doctorService.getAllDoctor();
+    this.doctorSub = this.doctorService
+      .getDoctorElementsUpdateListener()
+      .subscribe((elements: DoctorData[]) => {
+        console.log(elements);
+        this.doctorElements = elements;
+      });
   }
 
   currentDate() {
