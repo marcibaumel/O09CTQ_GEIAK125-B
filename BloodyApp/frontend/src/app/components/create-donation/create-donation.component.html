@@ -48,7 +48,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field [ngClass]="form.get('success_donation').value ? '':'invisible'" [ngClass]="form.get('success_donation').value == null ? 'invisible':''">
+    <mat-form-field [ngClass]="form.get('success_donation').value && form.get('success_donation').value != null ? '':'invisible'">
       <textarea
         matInput
         rows="6"
@@ -68,7 +68,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field [ngClass]="form.get('directed_donation').value ? '':'invisible'">
+    <mat-form-field  [ngClass]="form.get('directed_donation').value == true ? '':'invisible'">
       <input
         matInput
         type="text"
@@ -80,7 +80,7 @@
       >
     </mat-form-field>
 
-    <mat-form-field [ngClass]="form.get('directed_donation').value ? '':'invisible'">
+    <mat-form-field [ngClass]="form.get('directed_donation').value == true ? '':'invisible'">
       <input
         matInput
         type="text"

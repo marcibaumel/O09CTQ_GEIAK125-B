@@ -31,14 +31,23 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      directed_taj_code: new FormControl(null, {
-        validators: [],
+      donationPlace_id_fk: new FormControl(null, {
+        validators: [Validators.required],
       }),
-      success_donation: new FormControl(null, {
+      donor_taj_code: new FormControl(null, {
         validators: [Validators.required],
       }),
       donation_date: new FormControl(this.currentDate(), {
         validators: [Validators.required],
+      }),
+      doctor_id_fk: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      success_donation: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      about: new FormControl(null, {
+        validators: [],
       }),
       directed_donation: new FormControl(null, {
         validators: [Validators.required],
@@ -46,17 +55,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       directed_name: new FormControl(null, {
         validators: [],
       }),
-      about: new FormControl(null, {
+      directed_taj_code: new FormControl(null, {
         validators: [],
-      }),
-      donor_taj_code: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      doctor_id_fk: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      donationPlace_id_fk: new FormControl(null, {
-        validators: [Validators.required],
       }),
     });
 
