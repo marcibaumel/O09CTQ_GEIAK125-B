@@ -30,8 +30,8 @@ export class DonorService {
       postcode: postcode,
       town: town,
       address: address,
-      taj_code: taj_code
-    }
+      taj_code: taj_code,
+    };
     this.http
       .post<{ message: string; donor_id: number }>(
         'http://localhost:3000/api/donor',
@@ -44,14 +44,14 @@ export class DonorService {
       });
   }
 
- isDonorExistingByTajCode(taj: string):boolean{
-  console.log(taj);
-  let resultData:boolean;
+  isDonorExistingByTajCode(taj: string) {
+    this.http.get<{ message: string; donorIsExsiting: boolean }>(
+      'http://localhost:3000/api/donor/' + taj
+    ).subscribe((result)=>{
+      console.log(result)
+      return result.donorIsExsiting;
+    });
 
-  this.http.get<{message: string; result: boolean}>('http://localhost:3000/api/donor/' + taj).subscribe((responsData)=>{
-    resultData = responsData.result;
-  });
 
-  return resultData;
- }
+  }
 }

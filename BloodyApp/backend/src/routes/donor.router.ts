@@ -78,18 +78,22 @@ router.get('', (req, res, next) => {
 //DONOR IS EXISTING BY ID
 router.get('/:taj', async (req, res, next) => {
   const repository = getRepository(Donor);
-  const result = await repository.findOne({taj_code: req.params.taj});
-  //return res.send(results);
-  if(result == null){
-    return res.status(400).json({
-      message: 'Element not found',
-      result: false
+  try{
+    const taj = req.params.taj;
+    const entity = await repository.findOne({taj_code: req.params.taj});
+    if (!entity) {
+      return res.status(404).json({ message: 'Entity not founded', donorIsExsiting: false });
+    }
+    res.status(200).json({ message:"Entity founded" ,donorIsExsiting: true });
+  }catch(err){console.log(err)}
+  /*
+  repository.findOne({taj_code: req.params.taj}).then((result)=>{
+    return res.status(200).json({
+      message: 'Element found',
+      donor: true
     })
-  }
-  return res.status(200).json({
-    message: 'Element found',
-    result: true
   })
+  */
 })
 
 module.exports = router;

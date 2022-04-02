@@ -4,7 +4,9 @@ import { Subscription } from 'rxjs';
 import { DoctorData } from 'src/app/models/Doctor.Data';
 import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
 import { DoctorService } from 'src/app/services/doctor.service';
+import { DonationService } from 'src/app/services/donation.service';
 import { DonationPlaceService } from 'src/app/services/donationPlace.service';
+import { DonorService } from 'src/app/services/donor.service';
 
 @Component({
   selector: 'app-create-donation',
@@ -22,7 +24,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
   constructor(
     private donationPlaceService: DonationPlaceService,
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
+    private donorService: DonorService
   ) {}
 
   ngOnDestroy(): void {
@@ -88,7 +91,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
 
     if (!this.tajCodeValidationForDonor(this.form.get('donor_taj_code').value)) {
-      alert('Taj number is not correct, or is not in the donor list');
+      alert('Taj number is not correct, or is not in the donor database');
       this.form.get('donor_taj_code').reset();
       return;
     }
@@ -135,7 +138,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
         return;
       }
       if (!this.tajCodeValidationForDirected(this.form.get('directed_taj_code').value)) {
-        alert('Directed taj number is not correct, or is not in the donor list');
+        alert('Directed taj number is not correct');
         this.form.get('directed_taj_code').reset();
         return;
       }
@@ -197,9 +200,20 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    //if not in db
-
-    //console.log(numbers);
+    const data = this.donorService.isDonorExistingByTajCode(tajCode)
+    console.log(data)
+    /*
+    this.donorService.isDonorExistingByTajCode(tajCode).subscribe((result)=>{
+      if(!result.donorIsExsiting){
+        return false;
+      }
+      console.log("Good taj code")
+      return true
+    })
+  */
     return true;
+
   }
+
+
 }
