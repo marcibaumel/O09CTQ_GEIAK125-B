@@ -44,32 +44,14 @@ export class DonorService {
       });
   }
 
-  /*
-  addNewDonationPlace(
-    name: string,
-    postcode: number,
-    town: string,
-    address: string,
-    active: boolean
-  ) {
-    const newElement: DonationPlaceData = {
-      place_id: null,
-      name: name,
-      postcode: postcode,
-      town: town,
-      address: address,
-      active: active,
-    };
-    this.http
-      .post<{ message: string; place_id: number }>(
-        'http://localhost:3000/api/donationplace',
-        newElement
-      )
-      .subscribe((responseData) => {
-        const id = responseData.place_id;
-        //console.log(responseData.message);
-        this.router.navigate(['/donationplaces']);
-      });
-  }
-  */
+ isDonorExistingByTajCode(taj: string):boolean{
+  console.log(taj);
+  let resultData:boolean;
+
+  this.http.get<{message: string; result: boolean}>('http://localhost:3000/api/donor/' + taj).subscribe((responsData)=>{
+    resultData = responsData.result;
+  });
+
+  return resultData;
+ }
 }

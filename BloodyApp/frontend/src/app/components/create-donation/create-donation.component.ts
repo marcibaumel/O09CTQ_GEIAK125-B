@@ -141,6 +141,14 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       }
     }
 
+    if(this.form.get('success_donation').value){
+      this.form.get('about').reset();
+    }
+
+    if(!this.form.get('directed_donation').value){
+      this.form.get('directed_name').reset();
+      this.form.get('directed_taj_code').reset();
+    }
 
 
     console.log(this.form.value);
@@ -189,7 +197,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    //if already in db
+    //if not in db
 
     //console.log(numbers);
     return true;

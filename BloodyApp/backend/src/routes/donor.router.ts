@@ -75,5 +75,21 @@ router.get('', (req, res, next) => {
   });
 });
 
+//DONOR IS EXISTING BY ID
+router.get('/:taj', async (req, res, next) => {
+  const repository = getRepository(Donor);
+  const result = await repository.findOne({taj_code: req.params.taj});
+  //return res.send(results);
+  if(result == null){
+    return res.status(400).json({
+      message: 'Element not found',
+      result: false
+    })
+  }
+  return res.status(200).json({
+    message: 'Element found',
+    result: true
+  })
+})
 
 module.exports = router;
