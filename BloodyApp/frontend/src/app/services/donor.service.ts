@@ -43,15 +43,19 @@ export class DonorService {
         this.router.navigate(['']);
       });
   }
+  private data:boolean
 
-  isDonorExistingByTajCode(taj: string) {
-    this.http.get<{ message: string; donorIsExsiting: boolean }>(
+  async isDonorExistingByTajCode(taj: string): Promise<boolean> {
+    try{
+    const elem = await this.http.get<{ message: string; donorIsExsiting: boolean }>(
       'http://localhost:3000/api/donor/' + taj
-    ).subscribe((result)=>{
-      console.log(result)
-      return result.donorIsExsiting;
-    });
-
-
+    ).toPromise()
+    this.data = elem.donorIsExsiting;
+    console.log(this.data)
+    return this.data
+    }catch(err){
+      console.log(err)
+      return false
+    }
   }
 }

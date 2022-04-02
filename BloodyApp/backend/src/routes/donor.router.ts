@@ -75,17 +75,27 @@ router.get('', (req, res, next) => {
   });
 });
 
+
 //DONOR IS EXISTING BY ID
 router.get('/:taj', async (req, res, next) => {
+  /*
+  const repository = getRepository(Donor);
+  repository.findOne({taj_code: req.params.taj}).then((result)=>{
+    return res.status(200).json({
+      message: 'Taj is existing',
+      elements: result,
+    });
+  })
+  */
   const repository = getRepository(Donor);
   try{
-    const taj = req.params.taj;
     const entity = await repository.findOne({taj_code: req.params.taj});
     if (!entity) {
       return res.status(404).json({ message: 'Entity not founded', donorIsExsiting: false });
     }
-    res.status(200).json({ message:"Entity founded" ,donorIsExsiting: true });
+    res.status(200).json({ message:"Entity founded", donorIsExsiting: true });
   }catch(err){console.log(err)}
+  
   /*
   repository.findOne({taj_code: req.params.taj}).then((result)=>{
     return res.status(200).json({
@@ -95,5 +105,7 @@ router.get('/:taj', async (req, res, next) => {
   })
   */
 })
+
+
 
 module.exports = router;

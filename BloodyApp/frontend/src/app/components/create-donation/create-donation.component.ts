@@ -86,7 +86,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
     return currentDate.toISOString().substring(0, 10);
   }
 
-  onSaveNewDonation() {
+  async onSaveNewDonation() {
     //TODO: Refactor to methods to be more transparent
 
 
@@ -94,6 +94,14 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       alert('Taj number is not correct, or is not in the donor database');
       this.form.get('donor_taj_code').reset();
       return;
+    }
+
+    if(await this.donorService.isDonorExistingByTajCode(this.form.get('donor_taj_code').value)){
+      alert("Yeah")
+    }else{
+      alert("Noooooo")
+      this.form.get('donor_taj_code').reset();
+      return
     }
 
     if (this.form.get('donationPlace_id_fk').invalid) {
@@ -200,19 +208,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    const data = this.donorService.isDonorExistingByTajCode(tajCode)
-    console.log(data)
-    /*
-    this.donorService.isDonorExistingByTajCode(tajCode).subscribe((result)=>{
-      if(!result.donorIsExsiting){
-        return false;
-      }
-      console.log("Good taj code")
-      return true
-    })
-  */
     return true;
-
   }
 
 
