@@ -46,7 +46,7 @@ export class DonationService{
         const id = responseData.donation_id;
         console.log(responseData.message);
         console.log(responseData.donation_id);
-        this.router.navigate(['/donation']);
+        this.router.navigate(['/donations']);
       });
 
   }

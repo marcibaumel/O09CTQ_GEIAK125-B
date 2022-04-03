@@ -83,20 +83,81 @@ export class DonationListComponent implements OnInit, OnDestroy {
     }
 
     //JUST DATE
-
-
+    if(this.searchInputName == undefined && this.searchInputInDate != undefined && this.searchInputOutDate != undefined && this.searchInputPlace== undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donation_date >= this.searchInputInDate && this.donationElements[i].donation_date <= this.searchInputOutDate) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
 
     //JUST PLACE
-
+    if(this.searchInputName == undefined && this.searchInputInDate == undefined && this.searchInputOutDate== undefined && this.searchInputPlace != undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donationPlace_id_fk.name.includes(this.searchInputPlace)) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
 
     //JUST NAME AND DATE
+    if(this.searchInputName != undefined && this.searchInputInDate != undefined && this.searchInputOutDate != undefined && this.searchInputPlace== undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donor_id_fk.name.includes(this.searchInputName) && this.donationElements[i].donation_date >= this.searchInputInDate && this.donationElements[i].donation_date <= this.searchInputOutDate) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
 
     //JUST NAME AND PLACE
+    if(this.searchInputName != undefined && this.searchInputInDate == undefined && this.searchInputOutDate== undefined && this.searchInputPlace != undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donor_id_fk.name.includes(this.searchInputName) && this.donationElements[i].donationPlace_id_fk.name.includes(this.searchInputPlace)) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
 
     //JUST DATE AND PLACE
+    if(this.searchInputName == undefined && this.searchInputInDate != undefined && this.searchInputOutDate != undefined && this.searchInputPlace != undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donationPlace_id_fk.name.includes(this.searchInputPlace) && this.donationElements[i].donation_date >= this.searchInputInDate && this.donationElements[i].donation_date <= this.searchInputOutDate) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
+
 
     //JUST NAME AND DATE AND PLACE
+    if(this.searchInputName != undefined && this.searchInputInDate != undefined && this.searchInputOutDate!= undefined && this.searchInputPlace != undefined){
+      for (let i = 0; i < this.donationElements.length; i++) {
+        if (this.donationElements[i].donor_id_fk.name.includes(this.searchInputName) && this.donationElements[i].donationPlace_id_fk.name.includes(this.searchInputPlace) && this.donationElements[i].donation_date >= this.searchInputInDate && this.donationElements[i].donation_date <= this.searchInputOutDate) {
+          this.searchedElements.push(this.donationElements[i]);
+        }
+      }
+      console.log(this.searchedElements)
+    }
 
+    if(this.searchedElements.length > 0){
+      this.successfulSearch = true
+      this.searchInputInDate = null
+      this.searchInputOutDate = null
+      this.searchInputName = null
+      this.searchInputPlace = null
+    }
+    else{
+      alert('Not founded elements with these conditions')
+      this.successfulSearch = false;
+      this.searchInputInDate = null
+      this.searchInputOutDate = null
+      this.searchInputName = null
+      this.searchInputPlace = null
+    }
 
   }
 

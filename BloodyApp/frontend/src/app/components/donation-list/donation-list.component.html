@@ -17,7 +17,7 @@
     <mat-label>Select donation place</mat-label>
     <mat-select  [(ngModel)]="searchInputPlace" value="">
       <ng-container *ngFor="let place of donationPlaceElements">
-        <mat-option [value]="place">{{place.name}}</mat-option>
+        <mat-option [value]="place.name">{{place.name}}</mat-option>
       </ng-container>
     </mat-select>
   </mat-form-field>
@@ -27,7 +27,7 @@
 </div>
 
 
-<div class="accordion-field" >
+<div class="accordion-field" *ngIf="!successfulSearch">
   <mat-accordion >
     <mat-expansion-panel *ngFor="let element of donationElements" [ngClass]="element.directed_donation ? 'directed formated-card' : 'notdirected formated-card'">
       <mat-expansion-panel-header>
@@ -44,3 +44,21 @@
     </mat-expansion-panel>
   </mat-accordion>
   </div>
+
+  <div class="accordion-field" *ngIf="successfulSearch">
+    <mat-accordion >
+      <mat-expansion-panel *ngFor="let element of searchedElements" [ngClass]="element.directed_donation ? 'directed formated-card' : 'notdirected formated-card'">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ element.donor_id_fk.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Donation Date: {{element.donation_date}} </p>
+        <p *ngIf="element.directed_donation">Directed name: {{element.directed_name}}</p>
+        <p>Donation Place: {{element.donationPlace_id_fk.name}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    </div>
