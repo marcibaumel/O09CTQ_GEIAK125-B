@@ -87,50 +87,54 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
   }
 
   async onSaveNewDonation() {
-    //TODO: Refactor to methods to be more transparent
-
-
-    if (!this.tajCodeValidationForDonor(this.form.get('donor_taj_code').value)) {
+    if (
+      !this.tajCodeValidationForDonor(this.form.get('donor_taj_code').value)
+    ) {
       alert('Taj number is not correct, or is not in the donor database');
       this.form.get('donor_taj_code').reset();
       return;
     }
 
-    if(await this.donorService.isDonorExistingByTajCode(this.form.get('donor_taj_code').value)){
-      alert("Yeah")
-    }else{
-      alert("Noooooo")
+    if (
+      await this.donorService.isDonorExistingByTajCode(
+        this.form.get('donor_taj_code').value
+      )
+    ) {
+      alert('Yeah');
+    } else {
+      alert('Noooooo');
       this.form.get('donor_taj_code').reset();
-      return
+      return;
     }
 
     if (this.form.get('donationPlace_id_fk').invalid) {
       this.form.get('donationPlace_id_fk').reset();
-      return
+      return;
     }
 
     if (this.form.get('doctor_id_fk').invalid) {
       this.form.get('doctor_id_fk').reset();
-      return
+      return;
     }
 
     if (this.form.get('success_donation').invalid) {
       this.form.get('success_donation').reset();
-      return
+      return;
     }
 
     if (this.form.get('directed_donation').invalid) {
       this.form.get('directed_donation').reset();
-      return
+      return;
     }
-
 
     console.log(this.form.get('success_donation').value);
 
-
-    if(this.form.get('success_donation').value == false ){
+    if (this.form.get('success_donation').value == false) {
       console.log(this.form.get('about').value == null);
-      if(this.form.get('about').invalid || this.form.get('about').value == null){
+      if (
+        this.form.get('about').invalid ||
+        this.form.get('about').value == null
+      ) {
         console.log(this.form.get('success_donation').value);
         alert('Please write down the causes of the unsuccessful donation');
         this.form.get('about').reset();
@@ -138,32 +142,36 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       }
     }
 
-
-    if(this.form.get('directed_donation').value){
-      if (this.form.get('directed_name').invalid || this.form.get('directed_name').value == null) {
+    if (this.form.get('directed_donation').value) {
+      if (
+        this.form.get('directed_name').invalid ||
+        this.form.get('directed_name').value == null
+      ) {
         alert('Please write down the directed name');
         this.form.get('directed_name').reset();
         return;
       }
-      if (!this.tajCodeValidationForDirected(this.form.get('directed_taj_code').value)) {
+      if (
+        !this.tajCodeValidationForDirected(
+          this.form.get('directed_taj_code').value
+        )
+      ) {
         alert('Directed taj number is not correct');
         this.form.get('directed_taj_code').reset();
         return;
       }
     }
 
-    if(this.form.get('success_donation').value){
+    if (this.form.get('success_donation').value) {
       this.form.get('about').reset();
     }
 
-    if(!this.form.get('directed_donation').value){
+    if (!this.form.get('directed_donation').value) {
       this.form.get('directed_name').reset();
       this.form.get('directed_taj_code').reset();
     }
 
-
     console.log(this.form.value);
-
   }
 
   tajCodeValidationForDirected(tajCode: string): boolean {
@@ -210,6 +218,4 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
     return true;
   }
-
-
 }
