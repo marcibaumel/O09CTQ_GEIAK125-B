@@ -1,5 +1,4 @@
 import express from 'express';
-import { async } from 'rxjs';
 import { getRepository } from 'typeorm';
 import { Donation } from '../entity/Donation';
 
@@ -32,7 +31,7 @@ router.post('', (req, res, next) => {
     .save(donorEntity)
     .then((result) => {
       res.status(201).json({
-        messager: 'Donor created',
+        message: 'Donor created',
         result: result,
       });
     })

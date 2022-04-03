@@ -1,8 +1,8 @@
 import express from 'express';
-import { async } from 'rxjs';
 import { getRepository } from 'typeorm';
 import { Donor } from '../entity/Donor';
 
+const checkAuth = require('../middleware/check-auth')
 const router = express.Router();
 
 //TEST DONOR ROUTER
@@ -13,7 +13,9 @@ router.get('/test', (req, res, next) => {
 });
 
 //CREATE A NEW DONOR
-router.post('', (req, res, next) => {
+router.post('',
+//checkAuth, 
+(req, res, next) => {
   const repository = getRepository(Donor);
   const donorEntity = repository.create({
     name: req.body.name,
@@ -71,6 +73,42 @@ router.get('', (req, res, next) => {
       elements: result,
     });
   });
+});
+
+
+//DONOR IS EXISTING BY ID
+router.get('/:taj', async (req, res, next) => {
+  /*
+  const repository = getRepository(Donor);
+  repository.findOne({taj_code: req.params.taj}).then((result)=>{
+    return res.status(200).json({
+      message: 'Taj is existing',
+      elements: result,
+    });
+  })
+  */
+  const repository = getRepository(Donor);
+  try{
+    const entity = await repository.findOne({taj_code: req.params.taj});
+    if (!entity) {
+      return res.status(404).json({ message: 'Entity not founded', donorIsExsiting: false });
+    }
+    res.status(200).json({ message:"Entity founded", donorIsExsiting: true });
+  }catch(err){console.log(err)}
+  
+})
+
+//GET DONOR BY ID
+router.get('/getDonor/:taj', async (req, res, next) => {
+  
+  const repository = getRepository(Donor);
+  repository.findOne({taj_code: req.params.taj}).then((result)=>{
+    return res.status(200).json({
+      message: 'Taj is founded',
+      id: result.donor_id,
+    });
+  })
+  
 });
 
 
