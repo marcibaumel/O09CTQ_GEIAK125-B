@@ -104,9 +104,9 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
         this.form.get('donor_taj_code').value
       )
     ) {
-      alert('Yeah');
+      console.log("Taj is good")
     } else {
-      alert('Noooooo');
+      alert('Taj is not in the database, please first create the donor form for this taj code');
       this.form.get('donor_taj_code').reset();
       return;
     }

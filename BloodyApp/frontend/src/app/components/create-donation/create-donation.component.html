@@ -20,7 +20,7 @@
         maxlength="9"
       />
       <mat-error *ngIf="form.get('donor_taj_code').invalid"
-        >Please enter the donor taj code</mat-error
+        >Please enter the donor taj code waht is recorded in the donor database</mat-error
       >
     </mat-form-field>
 
@@ -59,7 +59,7 @@
         placeholder="About"
       ></textarea>
       <mat-error *ngIf="form.get('about').invalid"
-        >Please enter the about
+        >Please enter the about (minimum 5 charcter)
       </mat-error>
     </mat-form-field>
 
@@ -79,7 +79,7 @@
         placeholder="Enter the directed name"
       />
       <mat-error *ngIf="form.get('directed_name').invalid"
-        >Please enter a valid directed name</mat-error
+        >Please enter a valid directed name (minimum 4 character) </mat-error
       >
     </mat-form-field>
 

@@ -30,7 +30,7 @@
         placeholder="The donor nationality name"
       />
       <mat-error *ngIf="form.get('nationality').invalid"
-        >Please enter the donor nationality name </mat-error
+        >Please enter the donor nationality name (minimum 5, maximum 50 character) </mat-error
       >
     </mat-form-field>
 
@@ -42,7 +42,7 @@
         placeholder="The donor birth place"
       />
       <mat-error *ngIf="form.get('birth_place').invalid"
-        >Please enter the donor birth place name </mat-error
+        >Please enter the donor birth place name (minimum 5, maximum 50 character) </mat-error
       >
     </mat-form-field>
 
@@ -54,7 +54,7 @@
         placeholder="The donor birthday"
       />
       <mat-error *ngIf="form.get('birth_time').invalid"
-        >Please enter the birth time of the donor </mat-error
+        >Please enter the birth time of the donor (age minimum 18 year) </mat-error
       >
     </mat-form-field>
 
@@ -80,7 +80,7 @@
         placeholder="Enter the donor town"
       />
       <mat-error *ngIf="form.get('town').invalid"
-        >Please enter a valid town</mat-error
+        >Please enter a valid town (minimum 2, maximum 50 character)</mat-error
       >
     </mat-form-field>
 
@@ -92,7 +92,7 @@
         placeholder="Enter the donor address"
       />
       <mat-error *ngIf="form.get('address').invalid"
-        >Please enter a valid address</mat-error
+        >Please enter a valid address (minimum 5, maximum 50 character)</mat-error
       >
     </mat-form-field>
 
