@@ -31,7 +31,7 @@ router.post('', (req, res, next) => {
     .save(donorEntity)
     .then((result) => {
       res.status(201).json({
-        messager: 'Donor created',
+        message: 'Donor created',
         result: result,
       });
     })

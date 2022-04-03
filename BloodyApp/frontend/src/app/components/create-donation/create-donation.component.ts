@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DoctorData } from 'src/app/models/Doctor.Data';
 import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
+import { DonorData } from 'src/app/models/Donor.Data';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { DonationService } from 'src/app/services/donation.service';
 import { DonationPlaceService } from 'src/app/services/donationPlace.service';
@@ -25,7 +26,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
   constructor(
     private donationPlaceService: DonationPlaceService,
     private doctorService: DoctorService,
-    private donorService: DonorService
+    private donorService: DonorService,
+    private donationService: DonationService
   ) {}
 
   ngOnDestroy(): void {
@@ -95,6 +97,8 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return;
     }
 
+
+
     if (
       await this.donorService.isDonorExistingByTajCode(
         this.form.get('donor_taj_code').value
@@ -154,7 +158,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       if (
         !this.tajCodeValidationForDirected(
           this.form.get('directed_taj_code').value
-        )
+        ) || this.form.get('directed_taj_code').value == this.form.get('donor_taj_code').value
       ) {
         alert('Directed taj number is not correct');
         this.form.get('directed_taj_code').reset();
@@ -171,7 +175,18 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       this.form.get('directed_taj_code').reset();
     }
 
-    console.log(this.form.value);
+    this.donationService.addNewDonation(
+      this.form.value.donation_date,
+      this.form.value.success_donation,
+      this.form.value.about,
+      this.form.value.directed_donation,
+      this.form.value.directed_name,
+      this.form.value.directed_taj_code,
+      await this.donorService.getDonorByTajCode(this.form.get('donor_taj_code').value),
+      this.form.value.doctor_id_fk.doctor_id,
+      this.form.value.donationPlace_id_fk.place_id
+    );
+
   }
 
   tajCodeValidationForDirected(tajCode: string): boolean {

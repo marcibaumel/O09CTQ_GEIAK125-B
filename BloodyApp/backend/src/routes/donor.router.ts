@@ -96,16 +96,20 @@ router.get('/:taj', async (req, res, next) => {
     res.status(200).json({ message:"Entity founded", donorIsExsiting: true });
   }catch(err){console.log(err)}
   
-  /*
-  repository.findOne({taj_code: req.params.taj}).then((result)=>{
-    return res.status(200).json({
-      message: 'Element found',
-      donor: true
-    })
-  })
-  */
 })
 
+//GET DONOR BY ID
+router.get('/getDonor/:taj', async (req, res, next) => {
+  
+  const repository = getRepository(Donor);
+  repository.findOne({taj_code: req.params.taj}).then((result)=>{
+    return res.status(200).json({
+      message: 'Taj is founded',
+      id: result.donor_id,
+    });
+  })
+  
+});
 
 
 module.exports = router;

@@ -43,8 +43,8 @@ export class DonorService {
         this.router.navigate(['']);
       });
   }
-  private data: boolean;
 
+  private data: boolean;
   async isDonorExistingByTajCode(taj: string): Promise<boolean> {
     try {
       const elem = await this.http
@@ -60,4 +60,20 @@ export class DonorService {
       return false;
     }
   }
+
+  async getDonorByTajCode(taj: string): Promise<number> {
+    try {
+      const elem = await this.http
+        .get<{ message: string; id:number }>(
+          'http://localhost:3000/api/donor/getDonor/' + taj
+        )
+        .toPromise();
+      console.log(elem.id)
+      return elem.id;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
 }

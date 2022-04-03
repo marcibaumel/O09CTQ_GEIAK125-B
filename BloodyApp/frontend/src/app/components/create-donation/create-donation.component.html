@@ -4,7 +4,9 @@
     <mat-form-field>
       <mat-label>Select donation place</mat-label>
       <mat-select formControlName="donationPlace_id_fk" required >
-        <mat-option *ngFor="let place of donationPlaceElements" [value]="place">{{place.name}}</mat-option>
+        <ng-container *ngFor="let place of donationPlaceElements">
+          <mat-option *ngIf="place.active"  [value]="place">{{place.name}}</mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
 
