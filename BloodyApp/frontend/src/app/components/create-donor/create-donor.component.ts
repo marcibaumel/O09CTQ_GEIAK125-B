@@ -51,10 +51,21 @@ export class CreateDonorComponent implements OnInit {
     });
   }
 
-  onSaveNewDonor(){
+  async onSaveNewDonor(){
     console.log(this.form)
 
     this.tajCodeValidation(this.form.get("taj_code").value)
+
+    if (
+      await this.donorService.isDonorExistingByTajCode(
+        this.form.get('taj_code').value
+      )
+    ) {
+      alert('This taj code is already in the database');
+      this.form.get("taj_code").reset();
+      return;
+    }
+
 
     if(this.ageValidation(this.form.get("birth_time").value)<18){
       alert("Age is not over 18, donation is not allowed");
