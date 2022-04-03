@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { map, Subject } from "rxjs";
 import { DonationData } from "../models/Donation.Data";
 
 
@@ -45,17 +46,45 @@ export class DonationService{
         const id = responseData.donation_id;
         console.log(responseData.message);
         console.log(responseData.donation_id);
-        //this.router.navigate(['/donationplaces']);
+        this.router.navigate(['/donation']);
       });
 
   }
 
 
-  //TODO:get all from server
-  getAllDonation(){}
+  private donationElements: DonationData[] = [];
+  private donationElementsUpdated = new Subject<DonationData[]>();
 
-  //TODO:Fillters or map, not sure what is the best
-  getAllDonationWithParams(){}
+  getAllDonationPlace(){
+    this.http
+      .get<{ message: string; elements: any}>('http://localhost:3000/api/donation')
+      .pipe(
+        map((donationData) => {
+          return donationData.elements.map((element) => {
+            return {
+              donation_id: element.donation_id,
+              donation_date: element.donation_date,
+              success_donation: element.success_donation,
+              about: element.about,
+              directed_donation: element.directed_donation,
+              directed_name: element.directed_name,
+              directed_taj_code: element.directed_taj_code,
+              donor_id_fk: element.donor_id_fk,
+              doctor_id_fk: element.doctor_id_fk,
+              donationPlace_id_fk: element.donationPlace_id_fk
+            };
+          });
+        })
+      )
+      .subscribe((transformedElements) => {
+        this.donationElements = transformedElements;
+        this.donationElementsUpdated.next([...this.donationElements]);
+      });
+  }
+
+  getDonationElementsUpdateListener(){
+    return this.donationElementsUpdated.asObservable();
+  }
 
 
 }

@@ -27,12 +27,12 @@ export class Donation {
     @Column({nullable: true})
     directed_taj_code: string;
 
-    @ManyToOne(() => Donor, (donor: Donor) => donor.donor_id)
+    @ManyToOne(() => Donor, (donor: Donor) => donor.donor_id, {eager: true})
     donor_id_fk: Donor
 
     @ManyToOne(() => Doctor, (doctor: Doctor) => doctor.doctor_id)
     doctor_id_fk: Doctor
 
-    @ManyToOne(() => DonationPlace, (donationPlace: DonationPlace) => donationPlace.place_id)
+    @ManyToOne(() => DonationPlace, (donationPlace: DonationPlace) => donationPlace.place_id, {eager: true})
     donationPlace_id_fk: DonationPlace
 }
