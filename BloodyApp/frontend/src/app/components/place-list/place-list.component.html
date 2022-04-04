@@ -1,5 +1,11 @@
 <div *ngFor="let element of donationPlaceElements">
-  <mat-card [ngClass]="element.active ? 'place-active formated-card' : 'place-inactive formated-card'">
+  <mat-card
+    [ngClass]="
+      element.active
+        ? 'place-active formated-card'
+        : 'place-inactive formated-card'
+    "
+  >
     <mat-card-title>{{ element.name }}</mat-card-title>
     <mat-card-content>
       <p><strong>Postcode:</strong> {{ element.postcode }}</p>
