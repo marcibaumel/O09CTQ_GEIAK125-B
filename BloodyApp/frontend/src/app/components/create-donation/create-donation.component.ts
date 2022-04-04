@@ -126,8 +126,9 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.form.get('directed_donation').invalid) {
+    if (this.form.get('success_donation').invalid && this.form.get('directed_donation').invalid) {
       this.form.get('directed_donation').reset();
+      console.log('itt van a hiba')
       return;
     }
 
@@ -135,6 +136,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
     if (this.form.get('success_donation').value == false) {
       console.log(this.form.get('about').value == null);
+      console.log("here")
       if (
         this.form.get('about').invalid ||
         this.form.get('about').value == null

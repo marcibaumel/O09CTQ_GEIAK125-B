@@ -18,7 +18,7 @@ export class Donation {
     @Column({nullable: true})
     about: string;
 
-    @Column()
+    @Column({nullable: true})
     directed_donation: boolean;
 
     @Column({nullable: true})

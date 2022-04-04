@@ -32,6 +32,10 @@ export class DonationListComponent implements OnInit, OnDestroy {
     this.donationSub.unsubscribe();
   }
 
+  dateFormater(givenDate: string): Date {
+    return new Date(givenDate);
+  }
+
   ngOnInit(): void {
     this.donationService.getAllDonationPlace();
     this.donationSub = this.donationService

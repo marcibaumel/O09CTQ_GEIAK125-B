@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DonationPlaceData } from 'src/app/models/DonationPlace.Data';
+import { AuthService } from 'src/app/services/auth.service';
 import { DonationPlaceService } from 'src/app/services/donationPlace.service';
 
 @Component({
@@ -13,10 +14,14 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   donationPlaceElements: DonationPlaceData[] = [];
   private donationPlaceSub: Subscription;
 
-  constructor(private donationPlaceService: DonationPlaceService) {}
+  userIsAuthenticated = false;
+  private authListnerSubs: Subscription;
+
+  constructor(private donationPlaceService: DonationPlaceService, private authService: AuthService) {}
 
   ngOnDestroy(): void {
     this.donationPlaceSub.unsubscribe();
+    this.authListnerSubs.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -27,6 +32,11 @@ export class PlaceListComponent implements OnInit, OnDestroy {
         console.log(elements);
         this.donationPlaceElements = elements;
       });
+
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authListnerSubs = this.authService.getAuthStatusListnere().subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+    });
   }
 
   onDelete(id: string) {
