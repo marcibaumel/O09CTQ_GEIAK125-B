@@ -59,12 +59,12 @@ export class DonationListComponent implements OnInit, OnDestroy {
     this.searchedElements = [];
 
     if(this.searchInputInDate > this.searchInputOutDate){
-      alert("In date cant be bigger than out date")
+      alert("Start date cant be bigger than out date")
       this.searchInputInDate = null;
       return
     }
     if(this.searchInputOutDate< this.searchInputInDate){
-      alert("Out date cant be smaller than in date")
+      alert("End date cant be smaller than in date")
       this.searchInputOutDate = null;
       return
     }

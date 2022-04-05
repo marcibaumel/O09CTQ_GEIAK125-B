@@ -16,12 +16,20 @@
         mat-button
         routerLink="/newdonationplaces"
         routerLinkActive="mat-accent"
-        >New Donation Place</a
+        >Create Donation Place</a
+      >
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <a
+        mat-button
+        routerLink="/createnewdoctor"
+        routerLinkActive="mat-accent"
+        >Create Doctor</a
       >
     </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/createnewdonor" routerLinkActive="mat-accent"
-        >New Donor</a
+        >Create Donor</a
       >
     </li>
     <li *ngIf="userIsAuthenticated">

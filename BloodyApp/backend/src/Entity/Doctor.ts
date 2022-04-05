@@ -7,7 +7,7 @@ export class Doctor  {
     @PrimaryGeneratedColumn()
     doctor_id: number;
 
-    @Column()
+    @Column({unique:true})
     email: string;
 
     @Column()

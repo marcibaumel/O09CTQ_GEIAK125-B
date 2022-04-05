@@ -22,6 +22,7 @@ import { CreateDonorComponent } from './components/create-donor/create-donor.com
 import { LoginComponent } from './components/login/login.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CreateDoctorComponent } from './components/create-doctor/create-doctor.component';
 
 
 
@@ -36,6 +37,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     CreateDonorComponent,
     LoginComponent,
     WelcomePageComponent,
+    CreateDoctorComponent,
 
   ],
   imports: [

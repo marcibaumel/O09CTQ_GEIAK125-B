@@ -2,7 +2,9 @@ import express from 'express';
 import { getRepository } from 'typeorm';
 import { Donor } from '../entity/Donor';
 
+//Check if it authanticated user can use it
 const checkAuth = require('../middleware/check-auth')
+
 const router = express.Router();
 
 //TEST DONOR ROUTER

@@ -25,8 +25,22 @@ export class AuthService{
     return this.authStatusListener.asObservable();
   }
 
+  creatUser(email: string, name: string, password: string) {
+    const authData: AuthData = { email: email, name: name, password: password };
+    this.http
+      .post('http://localhost:3000/api/doctor/signup', authData)
+      .subscribe((response) => {
+        alert("Doctor created with this email address:  "+ authData.email)
+        this.router.navigate(['/']);
+        console.log('Signup responese:'+response);
+      }, err => {
+        alert("Email is used or database not working")
+        console.log(err);
+      })
+  }
+
   login(email: string, password: string) {
-    const authData: AuthData = { email: email, password: password };
+    const authData: AuthData = { email: email, password: password, name:null };
     this.http
       .post<{ token: string; expiresIn: number }>(
         'http://localhost:3000/api/doctor/login',
@@ -48,6 +62,9 @@ export class AuthService{
           console.log(expirationDate);
           this.router.navigate(['/']);
         }
+      }, err => {
+        alert("Email or password is not correct")
+        console.log(err);
       });
   }
 
