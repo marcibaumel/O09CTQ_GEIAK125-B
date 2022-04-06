@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DonorData } from '../models/Donor.Data';
 
+
 @Injectable({ providedIn: 'root' })
 export class DonorService {
   constructor(private http: HttpClient, private router: Router) {}
@@ -41,6 +42,9 @@ export class DonorService {
         const id = responseData.donor_id;
         //console.log(responseData.message);
         this.router.navigate(['']);
+      }, err => {
+        alert("Taj is not valid")
+        console.log(err);
       });
   }
 

@@ -145,7 +145,7 @@ export class CreateDonorComponent implements OnInit {
     return age;
   }
 
-  //TODO: Backend hibaüzenetett lekezelni ha már benne van a db-be az adott TAJ CODE
+
   tajCodeValidation(tajCode: string): boolean {
     let isnum: boolean = /^\d+$/.test(tajCode);
     if (tajCode == null || tajCode.length != 9 || !isnum) {

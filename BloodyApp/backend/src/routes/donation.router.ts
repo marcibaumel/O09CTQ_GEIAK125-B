@@ -57,7 +57,7 @@ router.get('', (req, res, next) => {
 });
 
 
-//TODO:Delete donation
+//Delete donation
 router.delete('/:id', async (req, res, next) => {
   console.log('Delete has started with this id:' + req.body.id);
   const repository = getRepository(Donation);

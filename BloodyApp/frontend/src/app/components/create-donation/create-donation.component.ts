@@ -116,6 +116,7 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
       return;
     }
 
+
     if (this.form.get('doctor_id_fk').invalid) {
       this.form.get('doctor_id_fk').reset();
       return;
@@ -170,6 +171,12 @@ export class CreateDonationComponent implements OnInit, OnDestroy {
 
     if (this.form.get('success_donation').value) {
       this.form.get('about').reset();
+    }
+
+    if (this.form.get('success_donation').value == true && this.form.get('directed_donation').value.invalid) {
+      console.log(this.form.get('directed_donation').value)
+      alert("Choose directed donation")
+      //this.form.value.directed_donation = false;
     }
 
     if (!this.form.get('directed_donation').value) {

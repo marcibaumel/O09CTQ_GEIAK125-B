@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { Donor } from '../entity/Donor';
 
 //Check if it authanticated user can use it
+//Not used
 const checkAuth = require('../middleware/check-auth')
 
 const router = express.Router();
@@ -14,11 +15,44 @@ router.get('/test', (req, res, next) => {
   });
 });
 
+
+
+function tajCodeValidation(tajCode: string): boolean {
+  let isnum: boolean = /^\d+$/.test(tajCode);
+  if (tajCode == null || tajCode.length != 9 || !isnum) {
+    return false;
+  }
+
+  var numbers = tajCode.split('').map(function (item) {
+    return parseInt(item, 10);
+  });
+
+  let cdv =
+    (7 * (numbers[0] + numbers[2] + numbers[4] + numbers[6]) +
+      3 * (numbers[1] + numbers[3] + numbers[5] + numbers[7])) %
+    10;
+  console.log(cdv);
+  if (cdv != numbers[8]) {
+    return false;
+  }
+
+  console.log(numbers);
+  return true;
+}
+
 //CREATE A NEW DONOR
 router.post('',
 //checkAuth, 
 (req, res, next) => {
   const repository = getRepository(Donor);
+
+  if(!tajCodeValidation(req.body.taj_code)){
+    return res.status(400).json({
+      message: 'Taj format not valid',
+    });
+  }
+  
+
   const donorEntity = repository.create({
     name: req.body.name,
     sex: req.body.sex,
